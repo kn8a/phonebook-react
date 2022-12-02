@@ -19,7 +19,7 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <Box textAlign="center" fontSize="xl">
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
             <Routes>
               <Route
                 path="/"

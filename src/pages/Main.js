@@ -31,6 +31,7 @@ function Main() {
   const [contacts, setContacts] = useState([]);
   const [searchInput, setSearchInput] = useState('');
   const [filteredResults, setFilteredResults] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [newContact, setNewContact] = useState({
     name_first: '',
     name_last: '',
@@ -43,7 +44,6 @@ function Main() {
   useEffect(() => {
     updateContacts();
   }, []);
-
   const searchItems = searchValue => {
     setSearchInput(searchValue);
     const filteredData = contacts.filter(item => {
@@ -56,20 +56,25 @@ function Main() {
   };
 
   const updateContacts = () => {
+    setLoading(true);
     axios
       .get(getContactsURL)
       .then(res => {
         setContacts([]);
         setContacts(res.data.contacts);
+        setLoading(false);
       })
-      .catch(err => {});
+      .catch(err => {
+        console.log(err);
+        setLoading(false);
+      });
   };
 
   const addContact = () => {
+    setLoading(true);
     axios
       .post(addContactsURL, newContact)
       .then(res => {
-        console.log(res.data);
         setNewContact({
           name_first: '',
           name_last: '',
@@ -83,6 +88,7 @@ function Main() {
           duration: 2000,
           isClosable: true,
         });
+        setLoading(false);
       })
       .catch(err => {
         toast({
@@ -92,6 +98,7 @@ function Main() {
           duration: 2000,
           isClosable: true,
         });
+        setLoading(false);
       });
   };
 
@@ -133,6 +140,8 @@ function Main() {
               colorScheme={'blue'}
               onClick={onOpen}
               leftIcon={<FaPlusCircle />}
+              isLoading={loading}
+              loadingText="Loading..."
             >
               Add contact
             </Button>
@@ -223,10 +232,22 @@ function Main() {
             flexDirection={'column'}
           >
             <Flex justifyContent={'space-around'} w="100%">
-              <Button colorScheme={'blue'} mr={3} onClick={onClose} size="lg">
+              <Button
+                colorScheme={'blue'}
+                mr={3}
+                onClick={onClose}
+                size="lg"
+                isDisabled={loading}
+              >
                 Cancel
               </Button>
-              <Button colorScheme="green" size={'lg'} onClick={addContact}>
+              <Button
+                colorScheme="green"
+                size={'lg'}
+                onClick={addContact}
+                loadingText="Adding..."
+                isLoading={loading}
+              >
                 Add contact
               </Button>
             </Flex>
