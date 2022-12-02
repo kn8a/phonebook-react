@@ -50,7 +50,7 @@ function Main() {
       return Object.values(item)
         .join('')
         .toLowerCase()
-        .includes(searchInput.toLowerCase());
+        .includes(searchValue.toLowerCase());
     });
     setFilteredResults(filteredData);
   };
@@ -158,7 +158,7 @@ function Main() {
             />
           </InputGroup>
           <Flex flexDirection={'column'}>
-            {searchInput.length > 1
+            {searchInput.length > 0
               ? filteredResults.map(contact => {
                   return (
                     <Flex key={contact._id} shadow="md" p={4} rounded="4">
