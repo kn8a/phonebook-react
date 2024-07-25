@@ -1,4 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Simple Phonebook app with CRUD functionality + seach.
+
+![Captryhregerure](https://user-images.githubusercontent.com/88045655/213617525-45bd9177-aee8-4c3b-851d-d16ef6f5fce7.JPG)
+
 
 ## Available Scripts
 
