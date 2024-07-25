@@ -180,7 +180,7 @@ function Contact(props) {
                 colorScheme="green"
                 size={'lg'}
                 onClick={saveEdit}
-                loadingText="Adding..."
+                loadingText="Saving..."
                 isLoading={isLoading}
               >
                 Save changes

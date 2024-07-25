@@ -18,7 +18,7 @@ import Main from './pages/Main';
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
+      <Box textAlign="center" fontSize="xl"> 
         <Router basename={process.env.PUBLIC_URL}>
             <Routes>
               <Route
